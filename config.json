@@ -1,0 +1,9 @@
+{
+    "port": 3220,
+    "mongoUrl": "mongodb://localhost:27017/",
+    "mongoDb": "zhixun",
+    "authServer": "http://10.227.2.11:3001",
+    "tokenExpires": 1209600,
+    "uploadSizeLimit": 2097152,
+    "uploadTypes": ["jpg", "jpeg", "png"]
+  }
