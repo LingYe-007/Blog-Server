@@ -1,10 +1,11 @@
-import { Stream, Controller, Context } from '@icekuma/node-server'
+import { Stream, Controller, Context, Post, Joi } from '@icekuma/node-server'
 
 import stats from '../stats'
 import * as fileService from '../services/fileService'
 
 @Controller('/api/v1/file')
 export default class FileApi {
+  @Stream('/upload')
   async upload(ctx: Context) {
     const { name } = ctx.body
     if (!name) throw stats.ErrBadParams
@@ -15,6 +16,7 @@ export default class FileApi {
     })
   }
 
+  @Stream('/download')
   async download(ctx: Context) {
     const { id } = ctx.body
     if (!id) throw stats.ErrBadParams
@@ -26,7 +28,6 @@ export default class FileApi {
     }
     if (filename.endsWith('.png')) type = 'text/plain'
     ctx.res.setHeader('Content-Type', type)
-
     ctx.res.setHeader(
       'Content-Disposition',
       'attachment;filename' + encodeURIComponent(file.name)
