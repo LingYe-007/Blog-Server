@@ -5,5 +5,5 @@
     "authServer": "http://10.227.2.11:3001",
     "tokenExpires": 1209600,
     "uploadSizeLimit": 2097152,
-    "uploadTypes": ["jpg", "jpeg", "png"]
+    "uploadTypes": ["mdx", "md", "png"]
   }

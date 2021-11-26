@@ -50,7 +50,11 @@ export async function del(query: IActicle) {
  * @param pageIndex
  * @returns
  */
-export async function list(filter: {}, pageSize?: number, pageIndex?: number) {
+export async function list(
+  filter: {},
+  pageSize?: number,
+  pageIndex?: number
+) {
   const result = await db.acticleCollection
     .find(filter)
     .sort({ createdAt: -1 })

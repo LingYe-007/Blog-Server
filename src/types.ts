@@ -48,6 +48,7 @@ export interface IToken {
 
 export interface IFile {
   name: string
+  acticleId:string
   data: Binary
   size: number
   createdAt: Long

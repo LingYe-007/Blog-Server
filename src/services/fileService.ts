@@ -6,7 +6,11 @@ import config from '../config'
 import * as db from '../db'
 import stats from '../stats'
 
-export async function upload(req: IncomingMessage, name: string) {
+export async function upload(
+  req: IncomingMessage,
+  name: string,
+  acticleId: string
+) {
   const extname = path.extname(name.toLowerCase()).replace(/^\./, '')
   if (config.uploadTypes.includes(extname) === false) {
     throw stats.ErrInvalidFileType
@@ -23,15 +27,16 @@ export async function upload(req: IncomingMessage, name: string) {
   })
   const result = await db.fileCollection.insertOne({
     name,
+    acticleId: acticleId,
     data: new Binary(Buffer.concat(chunks)),
     size,
     createdAt: Long.fromNumber(Date.now())
   })
-  return result.insertedId
+  return result.acknowledged
 }
 
-export async function find(_id: string) {
-  const result = await db.fileCollection.findOne({ _id: new ObjectId(_id) })
+export async function find(acticleId: string) {
+  const result = await db.fileCollection.findOne({ acticleId })
   if (!result) throw stats.ErrNotFound
   return result
 }
