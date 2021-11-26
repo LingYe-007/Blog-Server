@@ -51,10 +51,15 @@ export async function del(query: IActicle) {
  * @returns
  */
 export async function list(
-  filter: {},
+  filter?: {
+    _id: any
+  },
   pageSize?: number,
   pageIndex?: number
 ) {
+  if (filter._id) {
+    filter._id = new ObjectId(filter._id)
+  }
   const result = await db.acticleCollection
     .find(filter)
     .sort({ createdAt: -1 })
